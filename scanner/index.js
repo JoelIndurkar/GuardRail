@@ -5,6 +5,14 @@ const fs = require('fs');
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+  if (req.path === '/health') return next()
+  const key = req.headers['x-api-key']
+  if (!key || key !== process.env.SCAN_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+  next()
+})
 
 const DB_PATH = '/data/guardrail.db';
 const SCHEMA_PATH = '/app/schema.sql';
