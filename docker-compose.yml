@@ -23,7 +23,7 @@ services:
       - ./scanner:/app
       - guardrail_data:/data
     environment:
-      - SCAN_API_KEY=changeme-replace-this-with-a-real-secret
+      - SCAN_API_KEY=${SCAN_API_KEY}
     command: sh -c "apk add --no-cache git wget curl python3 make g++ && wget -qO- https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && mkdir -p /data && npm install && node index.js"
     ports:
       - "3001:3001"
