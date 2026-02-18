@@ -362,7 +362,7 @@ GuardRail's scanner doesn't just say "you have lodash 4.17.15 which has a known 
   - This decouples orchestration from compute, allowing multiple scanner instances
   - *If staying free tier*: Run Redis in Docker on the same EC2 instance. The architecture supports scaling even if you don't scale yet.
 
-- [ ] **Kubernetes deployment (optional — costs money)**
+- [ ] **Kubernetes deployment (optional — costs money)/ Oracle deployment (free - long term solution)**
   - If you choose to pursue this:
     - Use k3s (lightweight Kubernetes) on a single EC2 instance rather than EKS ($72/month for EKS control plane alone)
     - Helm charts for each service
