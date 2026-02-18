@@ -67,18 +67,12 @@ A running system where: a new CVE is published for a JS/TS dependency → n8n de
 
 #### Deliverables
 
-- [ ] **n8n running locally via Docker Compose**
+- [X] **n8n running locally via Docker Compose**
   - `docker-compose.yml` with n8n service and a SQLite volume for persistence
   - Accessible at `localhost:5678`
-  - *Why local first*: Learn the platform without fighting AWS networking. You'll deploy to EC2 in Subtier 3.
+  - local first, deploy to EC2 in Subtier 3
 
-- [ ] **"Hello World" workflows (learning exercises, not part of final product)**
-  - Scheduled workflow that fires every hour and logs a message
-  - HTTP Request workflow that calls a public API and processes the JSON
-  - Webhook-triggered workflow that accepts a POST request and returns a response
-  - *Purpose*: Get comfortable with n8n's node system, expressions, data flow between nodes, and error handling before building real workflows.
-
-- [ ] **CVE Polling Workflow (v1)**
+- [X] **CVE Polling Workflow (v1)**
   - **Trigger**: Cron schedule (every 6 hours is reasonable; NVD rate limits apply)
   - **Steps**:
     1. HTTP Request node → query [NVD API 2.0](https://nvd.nist.gov/developers/vulnerabilities) with `pubStartDate` / `pubEndDate` filtering for JS/TS ecosystem CVEs (keyword filter: `npm`, `node`, `javascript`, `typescript`)
@@ -89,11 +83,6 @@ A running system where: a new CVE is published for a JS/TS dependency → n8n de
   - **NVD API note**: The NVD API is free but rate-limited (5 requests per 30 seconds without API key, 50 with key). Request a free API key at https://nvd.nist.gov/developers/request-an-api-key early in the week.
   - **Success criteria**: Workflow runs on schedule, pulls real CVE data, filters correctly, and persists results.
 
-#### Resources to Study
-- [n8n documentation — core concepts](https://docs.n8n.io/workflows/)
-- [n8n Docker deployment guide](https://docs.n8n.io/hosting/installation/docker/)
-- [NVD API 2.0 documentation](https://nvd.nist.gov/developers/vulnerabilities)
-
 ---
 
 ### Subtier 2: Scanning Engine & Results Pipeline
@@ -102,13 +91,13 @@ A running system where: a new CVE is published for a JS/TS dependency → n8n de
 
 #### Deliverables
 
-- [ ] **Trivy installed and working locally**
+- [X] **Trivy installed and working locally**
   - Install [Trivy](https://github.com/aquasecurity/trivy) CLI
   - Confirm it can scan a `package-lock.json` file and produce JSON output: `trivy fs --scanners vuln --format json --output results.json /path/to/repo`
-  - Test against 2-3 popular repos by cloning them locally (suggested: `express`, `next.js`, `fastify`)
-  - *Why Trivy over Grype*: Trivy has better JS/TS ecosystem support and more active maintenance. You can swap later if needed.
+  - Test against 2-3 popular repos by cloning them locally (`express`, `fastify`)
+  - *Why Trivy over Grype*: Trivy has better JS/TS ecosystem support and more active maintenance. Can swap later if needed.
 
-- [ ] **Repo Scanner Workflow**
+- [X] **Repo Scanner Workflow**
   - **Trigger**: Called by CVE Polling Workflow when new high-severity CVEs are found (use n8n's "Execute Workflow" node), OR on a daily cron schedule independently
   - **Steps**:
     1. For each monitored repo (maintain a list — can be hardcoded JSON for now):
@@ -128,7 +117,7 @@ A running system where: a new CVE is published for a JS/TS dependency → n8n de
     ```
   - **Success criteria**: Workflow clones repos, scans them, produces structured vulnerability data.
 
-- [ ] **Results Processor Workflow**
+- [X] **Results Processor Workflow**
   - **Trigger**: Called by Repo Scanner with scan results
   - **Steps**:
     1. Normalize Trivy output into a consistent schema:
