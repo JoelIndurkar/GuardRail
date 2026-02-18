@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const API = 'http://localhost:3002'
+import { API } from '../config'
 
 interface Repo {
   name: string

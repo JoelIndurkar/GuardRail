@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const API = 'http://localhost:3002'
+import { API } from '../config'
 
 const SEVERITY_COLORS: Record<string, string> = {
   CRITICAL: 'text-red-400 bg-red-400/10',
