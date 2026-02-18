@@ -1,0 +1,9 @@
+{
+  "name": "guardrail-dashboard-api",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.18.0",
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5"
+  }
+}

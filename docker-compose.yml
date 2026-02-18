@@ -26,6 +26,16 @@ services:
     ports:
       - "3001:3001"
 
+  dashboard-api:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./dashboard-api:/app
+      - guardrail_data:/data
+    command: sh -c "npm install && node index.js"
+    ports:
+      - "3002:3002"
+
 volumes:
   n8n_data:
   guardrail_data:
