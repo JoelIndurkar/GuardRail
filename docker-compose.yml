@@ -21,9 +21,11 @@ services:
     working_dir: /app
     volumes:
       - ./scanner:/app
-    command: sh -c "apk add --no-cache git wget curl && wget -qO- https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && npm install && node index.js"
+      - guardrail_data:/data
+    command: sh -c "apk add --no-cache git wget curl && wget -qO- https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && mkdir -p /data && npm install && node index.js"
     ports:
       - "3001:3001"
 
 volumes:
   n8n_data:
+  guardrail_data:
