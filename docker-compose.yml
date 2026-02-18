@@ -1,0 +1,29 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=changeme
+    entrypoint: >
+      sh -c "
+      if [ ! -f /home/node/bin/trivy ]; then
+        wget -qO- https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /home/node/bin;
+      fi
+      && n8n start"
+
+  scanner:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./scanner:/app
+    command: sh -c "apk add --no-cache git wget curl && wget -qO- https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && npm install && node index.js"
+    ports:
+      - "3001:3001"
+
+volumes:
+  n8n_data:
