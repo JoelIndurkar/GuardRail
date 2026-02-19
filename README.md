@@ -7,10 +7,11 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 ---
 
 ## Architecture
+(Diagram via Claude)
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   n8n (Orchestrator)                    │
-│                                                         │
+┌────────────────────────────────────────────────────────┐
+│                   n8n (Orchestrator)                   │
+│                                                        │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
 │  │ CVE Polling  │  │ Repo Scanner │  │   Results    │  │
 │  │ Workflow     │  │ Workflow     │  │   Processor  │  │
@@ -32,8 +33,8 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 ```
 
 ### Request Flow
-1. n8n polls NVD API every 6 hours for new HIGH/CRITICAL CVEs affecting npm packages
-2. When new CVEs are found, n8n triggers the scanner microservice
+1. n8n polls NVD API every 6 hours for new higher-rated CVEs affecting npm packages
+2. When found, n8n triggers the scanner microservice
 3. Scanner clones monitored repos (shallow), runs Trivy vulnerability analysis, stores results
 4. Dashboard API serves normalized findings from SQLite
 5. React dashboard displays findings by repo with severity breakdown and NVD links
@@ -42,29 +43,31 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Orchestration | n8n (self-hosted) |
-| Scanning Engine | Trivy |
-| Backend API | Express.js + better-sqlite3 |
-| Frontend | React + TypeScript + Tailwind CSS |
-| Reverse Proxy | Caddy (automatic HTTPS) |
-| Database | SQLite (→ PostgreSQL in Tier 2) |
-| Infrastructure | AWS EC2 t3.micro |
-| Containerization | Docker Compose |
-
++==================+===================================+
+| Layer            | Technology                        |
+|==================+===================================|
+| Orchestration    | n8n (self-hosted)                 |
+| Scanning Engine  | Trivy                             |
+| Backend API      | Express.js + better-sqlite3       |
+| Frontend         | React + TypeScript + Tailwind CSS |
+| Reverse Proxy    | Caddy (automatic HTTPS)           |
+| Database         | SQLite (→ PostgreSQL in Tier 2)   |
+| Infrastructure   | AWS EC2 t3.micro                  |
+| Containerization | Docker Compose                    |
++==================+===================================+
 ---
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `:3001/scan` | Trigger a repo scan (requires `x-api-key` header) |
-| `GET` | `/api/repos` | All monitored repos with latest scan summary |
-| `GET` | `/api/repos/:name/findings` | Findings for a specific repo |
-| `GET` | `/api/findings/recent` | 50 most recent findings across all repos |
-| `GET` | `/api/stats` | Aggregate stats and scan history |
-
++========+=============================+===================================================+
+| Method | Endpoint                    | Description                                       |
+|========+=============================+===================================================|
+| `POST` | `:3001/scan`                | Trigger a repo scan (requires `x-api-key` header) |
+| `GET`  | `/api/repos`                | All monitored repos with latest scan summary      |
+| `GET`  | `/api/repos/:name/findings` | Findings for a specific repo                      |
+| `GET`  | `/api/findings/recent`      | 50 most recent findings across all repos          |
+| `GET`  | `/api/stats`                | Aggregate stats and scan history                  |
++========+=============================+===================================================+
 ---
 
 ## Local Development
