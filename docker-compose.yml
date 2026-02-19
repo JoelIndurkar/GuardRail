@@ -1,4 +1,14 @@
 services:
+  caddy:
+    image: caddy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
   n8n:
     image: n8nio/n8n
     volumes:
@@ -37,9 +47,9 @@ services:
     image: nginx:alpine
     volumes:
       - ./dashboard-ui/dist:/usr/share/nginx/html:ro
-    ports:
-      - "80:80"
 
 volumes:
   n8n_data:
   guardrail_data:
+  caddy_data:
+  caddy_config:

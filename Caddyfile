@@ -1,0 +1,8 @@
+grscan.duckdns.org {
+    handle /api/* {
+        reverse_proxy dashboard-api:3002
+    }
+    handle {
+        reverse_proxy dashboard-ui:80
+    }
+}
