@@ -3,6 +3,9 @@
 Autonomous Software Composition Analysis (SCA) platform that continuously monitors JavaScript/TypeScript repositories for known vulnerabilities and deprecated dependencies. Unlike reactive CI/CD checks, GuardRail operates as a persistent sentinel — polling threat intelligence feeds, triggering scans, and surfacing findings through a live web dashboard.
 
 **Live dashboard:** https://grscan.duckdns.org
+<img width="1918" height="585" alt="image" src="https://github.com/user-attachments/assets/42e670f8-c51d-4167-8162-cda35fe7118b" />
+<img width="417" height="175" alt="image" src="https://github.com/user-attachments/assets/4ae9ca94-ff37-4052-85b9-676a05ede646" /><img width="1233" height="351" alt="image" src="https://github.com/user-attachments/assets/2b31bea2-3021-4795-b501-9c3c61da7c5c" />
+
 
 ---
 
