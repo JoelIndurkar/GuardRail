@@ -139,18 +139,35 @@ Caddy automatically provisions TLS certificates via Let's Encrypt on first boot.
 
 ## Roadmap
 
+## Roadmap
+
 **Tier 2 (In Progress)**
-- PostgreSQL migration (replacing SQLite)
+- PostgreSQL migration (replacing SQLite) on AWS RDS
 - GitHub webhook integration for real-time scanning on push events
-- S3 report storage
+- S3 report storage and HTML report generation
 - Dashboard v2: trend charts, scan history diff, dependency blast-radius view
 - Integration tests for API endpoints
+- SSRF protection on scanner endpoint (GitHub URL whitelist)
+- Sandbox isolation for `/tmp` clone directory (prevent malicious repo escapes)
+- Restart policies and health checks for all containers
+- n8n workflow error handling and failure notifications
+- Trivy output validation and malformed JSON handling
+- CloudWatch logging and uptime alerting
+- Dashboard basic auth
 
 **Tier 3 (Planned)**
 - Custom Rust-based AST scanner (SWC) — traces vulnerable dependencies to exact code paths
-- LLM-powered remediation suggestions via Claude API
 - Redis job queue for horizontal scaling
+- Secrets scanning integration (Gitleaks) — detect committed credentials in monitored repos
 - Dashboard v3: code path visualization, contextual migration guidance
+- Backup strategy for PostgreSQL
+
+**Tier 4 (Stretch)**
+- LLM-powered remediation suggestions via Claude API
+- Multi-user authentication system
+- Per-user repo management — users monitor and view only their own repositories
+- Role-based access control
+- Oracle Cloud migration for always-free long-term hosting
 
 ---
 
