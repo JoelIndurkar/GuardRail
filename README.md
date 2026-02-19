@@ -42,7 +42,7 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 ---
 
 ## Tech Stack
-
+```
 +==================+===================================+
 | Layer            | Technology                        |
 |==================+===================================|
@@ -55,10 +55,11 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 | Infrastructure   | AWS EC2 t3.micro                  |
 | Containerization | Docker Compose                    |
 +==================+===================================+
+```
 ---
 
 ## API Endpoints
-
+```
 +========+=============================+===================================================+
 | Method | Endpoint                    | Description                                       |
 |========+=============================+===================================================|
@@ -68,6 +69,7 @@ Autonomous Software Composition Analysis (SCA) platform that continuously monito
 | `GET`  | `/api/findings/recent`      | 50 most recent findings across all repos          |
 | `GET`  | `/api/stats`                | Aggregate stats and scan history                  |
 +========+=============================+===================================================+
+```
 ---
 
 ## Local Development
