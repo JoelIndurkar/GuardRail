@@ -38,6 +38,13 @@ services:
     ports:
       - "3002:3002"
 
+  dashboard-ui:
+    image: nginx:alpine
+    volumes:
+      - ./dashboard-ui/dist:/usr/share/nginx/html:ro
+    ports:
+      - "5173:80"
+
 volumes:
   n8n_data:
   guardrail_data:
